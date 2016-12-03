@@ -1,9 +1,8 @@
 env:
   global:
     - UPLOAD_TO_PYPI=false
-    - REPO_DIR=sqlalchemy
-    # Commit from your-project that you want to build
     - BUILD_COMMIT=rel_1_1_4
+    - REPO_DIR=sqlalchemy
     # pip dependencies to _build_ your project
     - BUILD_DEPENDS=""
     # pip dependencies to _test_ your project.  Include any dependencies
