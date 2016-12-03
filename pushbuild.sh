@@ -36,23 +36,23 @@ if (( $? )); then
 fi
 
 if [ "$upload" ]; then
-    gsed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: true/" $appveyor
-    gsed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=true/" $travis
+    sed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: true/" $appveyor
+    sed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=true/" $travis
 else
-    gsed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: false/" $appveyor
-    gsed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=false/" $travis
+    sed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: false/" $appveyor
+    sed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=false/" $travis
 fi
 
-gsed -i "s/BUILD_COMMIT: \w\+/BUILD_COMMIT: ${commit}/" $appveyor
-gsed -i "s/BUILD_COMMIT=\w\+/BUILD_COMMIT=${commit}/" $travis
+sed -i "s/BUILD_COMMIT: \w\+/BUILD_COMMIT: ${commit}/" $appveyor
+sed -i "s/BUILD_COMMIT=\w\+/BUILD_COMMIT=${commit}/" $travis
 
 git add $appveyor $travis
 git commit -m "Build $commit"
 git push
 
 if [ "$upload" ]; then
-    gsed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: false/" $appveyor
-    gsed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=false/" $travis
+    sed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: false/" $appveyor
+    sed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=false/" $travis
     git add $appveyor $travis
     git commit -m "Reset UPLOAD_TO_PYPI to false."
 fi
