@@ -1,0 +1,60 @@
+environment:
+  global:
+    UPLOAD_TO_PYPI: false
+    BUILD_COMMIT: rel_1_1_4
+    REPO_DIR: sqlalchemy
+    PACKAGE_NAME: sqlalchemy
+    PYPI_USERNAME:
+      secure: secureuser
+    PYPI_PASSWORD:
+      secure: securepass
+
+  matrix:
+
+    # For Python versions available on Appveyor, see
+    # http://www.appveyor.com/docs/installed-software#python
+
+    - PYTHON: "C:\\Python26"
+    - PYTHON: "C:\\Python27"
+    - PYTHON: "C:\\Python33"
+    - PYTHON: "C:\\Python34"
+    - PYTHON: "C:\\Python35"
+    - PYTHON: "C:\\Python26-x64"
+    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python33-x64"
+      DISTUTILS_USE_SDK: "1"
+    - PYTHON: "C:\\Python34-x64"
+      DISTUTILS_USE_SDK: "1"
+    - PYTHON: "C:\\Python35-x64"
+
+version: "{build}"
+
+install:
+  - SET PATH=%APPVEYOR_BUILD_FOLDER%\appveyor;%PYTHON%;%PYTHON%\Scripts;%PYTHON%\Library\bin;%PATH%
+
+  # We need wheel installed to build wheels
+  - pip install -U twine wheel
+
+  # Fetch submodules
+  - git submodule update --init --recursive
+
+build_script:
+  - cd %REPO_DIR%
+  - git checkout %BUILD_COMMIT%
+
+  # If you don't need to build C extensions on 64-bit Python 3.3 or 3.4,
+  # you can remove "build.cmd" from the front of the command, as it's
+  # only needed to support those cases.
+  # Note that you must use the environment variable %PYTHON% to refer to
+  # the interpreter you're using - Appveyor does not do anything special
+  # to put the Python version you want to use on PATH.
+  #
+  # Build wheel without dev tag
+  - build.cmd python setup.py egg_info --tag-build= bdist_wheel
+
+after_build:
+  - after_build.bat
+
+artifacts:
+  # bdist_wheel puts your built wheel in the dist directory
+  - path: sqlalchemy\dist\*
