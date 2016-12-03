@@ -16,10 +16,10 @@ env:
     # Following generated with
     # travis encrypt -r your-org/your-project-wheels PYPI_USERNAME=<username>
     - secure:
-      "<insert here>"
+        "<insert here>"
     # travis encrypt -r your-org/your-project-wheels PYPI_PASSWORD=<password>
     - secure:
-      "<insert here>"
+        "<insert here>"
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -105,4 +105,5 @@ script:
 
 after_success:
   - ls -l ${TRAVIS_BUILD_DIR}/wheelhouse
+  - source config.sh
   - upload_wheel

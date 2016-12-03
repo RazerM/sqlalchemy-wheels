@@ -34,8 +34,12 @@ function build_wheel {
 }
 
 function upload_wheel {
-    if [ "$UPLOAD_PYPI" = "true" ]
+    if [ "$UPLOAD_TO_PYPI" = "true" ]
     then
-        twine upload -u %PYPI_USERNAME% -p %PYPI_PASSWORD% ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+        pip install twine
+        echo "Uploading to PyPI..."
+        twine upload -u "$PYPI_USERNAME" -p "$PYPI_PASSWORD" ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+    else
+        echo "Skipping PyPI upload, UPLOAD_TO_PYPI != true"
     fi
 }
