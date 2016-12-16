@@ -54,5 +54,6 @@ if [ "$upload" ]; then
     sed -i "s/UPLOAD_TO_PYPI: \w\+/UPLOAD_TO_PYPI: false/" $appveyor
     sed -i "s/UPLOAD_TO_PYPI=\w\+/UPLOAD_TO_PYPI=false/" $travis
     git add $appveyor $travis
-    git commit -m "Reset UPLOAD_TO_PYPI to false."
+    git commit -m "Reset UPLOAD_TO_PYPI to false." -m "[skip ci]"
+    git push
 fi
