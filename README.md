@@ -24,7 +24,8 @@ Instructions:
 - Sets `UPLOAD_TO_PYPI` to `true` unless `-u` is passed.
 - Sets `BUILD_COMMIT` to the first positional argument.
 - Commits and pushes the changes.
-- Resets `UPLOAD_TO_PYPI` to `false` and commits the change.
+- Resets `UPLOAD_TO_PYPI` to `false`.
+- Commits with `[skip ci]` then pushes.
 
 ### Example
 ```bash
