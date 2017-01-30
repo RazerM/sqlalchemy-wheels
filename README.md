@@ -1,5 +1,7 @@
 # sqlalchemy-wheels
 
+[![Travis CI][travis-img]][travis-link] [![AppVeyor CI][appveyor-img]][appveyor-link]
+
 This repository is used to build wheels for Windows, Linux ([manylinux1][]), and macOS.
 
 [manylinux1]: https://www.python.org/dev/peps/pep-0513/
@@ -34,3 +36,8 @@ Instructions:
 # Build 1.0.0 but don't upload
 ./pushbuild.sh rel_1_0_0
 ```
+
+[travis-img]: https://travis-ci.org/RazerM/sqlalchemy-wheels.svg?branch=master
+[travis-link]: https://travis-ci.org/RazerM/sqlalchemy-wheels
+[appveyor-img]: https://ci.appveyor.com/api/projects/status/6p9xdrreco05flpv/branch/master?svg=true
+[appveyor-link]: https://ci.appveyor.com/project/RazerM/sqlalchemy-wheels-i7f5s/branch/master
