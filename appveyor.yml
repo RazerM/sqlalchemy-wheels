@@ -56,12 +56,10 @@ build_script:
 
 after_build:
   - after_build.bat
-
-artifacts:
-  # bdist_wheel puts your built wheel in the dist directory
-  - path: sqlalchemy\dist\*
+  - ps: Get-ChildItem .\sqlalchemy\dist\*.whl | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName s3 }
 
 deploy:
+  name: s3
   provider: S3
   access_key_id: AKIAIXWLOTFMKC7GID2A
   secret_access_key:
