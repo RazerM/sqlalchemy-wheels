@@ -56,7 +56,7 @@ build_script:
 
 after_build:
   - after_build.bat
-  - ps: Get-ChildItem .\sqlalchemy\dist\*.whl | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName s3 }
+  - ps: Get-ChildItem .\dist\*.whl | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName s3 }
 
 deploy:
   name: s3
