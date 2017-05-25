@@ -11,7 +11,6 @@ env:
     - TEST_DEPENDS=""
     - PLAT=x86_64
     - UNICODE_WIDTH=32
-    - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
     # Following generated with
     # travis encrypt -r your-org/your-project-wheels PYPI_USERNAME=<username>
     - secure:
@@ -117,3 +116,15 @@ after_success:
   - ls -l ${TRAVIS_BUILD_DIR}/wheelhouse
   - source config.sh
   - upload_wheel
+
+deploy:
+  provider: s3
+  access_key_id: AKIAJ25C3WPVDLNLCNOA
+  secret_access_key:
+    secure: Gh1fACqZHN0XLZ82fwSe/8a9inr/F5Rs9KwXBMw/9DAi5RWBEZOrlW2f0/sp4CSx0KxlJIF0o67ui0PCF0xx7HNTambbuMinB3Gjr3k/mYcvUhl0a7l0eouTvqsAYlJfXQ5uCM5Qko/xn45kt4BLtP1qt5KYVtcECEE+PMp6dY9GHeKCAjd6fP64dBj/7xzCeuvcOpKOTMW12aewaPloBn50fMyr2uKDTlgmpPpsLEhaIFl4Pv5lVnD0Qfm9PkHhkQAO5sNm0LBk0pD6JiG86bm5K+zTCM2HlioJI3717fVaoFC46wbxuA8zrFZgKK0Jh+2fErXvGIrXx9TKXXyADn5nBz1R0vFD9Y8XAHTJ+b+TKEErSB409RzjV5OtfE7LHSniEK3HhSltsqG7VVOQgKyLk7O38XInh1Sw1VsBJQeS4UsP4BvRYpQqoII+YxAmAG1MA73ryWeMVx+eiVBCk/U1KQtYNZ7tnB0NBImksb88QLgsr4VfA/qG+w/4gFc66V+6wRjx2xJSXhV7GP/2pg4KDEpJT7u/j43SswlEG6+JuMDkz6aApG9VPkjeJqOgjvqHNXoLTqhxZwLGeqJez5bSxaSl4VKkQh+GhKEves0Z7+ulMNBuXQMB/bPf2xSMslIvxAphDpr85tRK6bUyBzamVOgoRYIxnRTRs1iIEUw=
+  bucket: sqlalchemy-wheels
+  local_dir: ${TRAVIS_BUILD_DIR}/wheelhouse
+  skip_cleanup: true
+  on:
+    repo: RazerM/sqlalchemy-wheels
+    branch: master
