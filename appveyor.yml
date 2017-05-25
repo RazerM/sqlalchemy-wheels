@@ -60,3 +60,10 @@ after_build:
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   - path: sqlalchemy\dist\*
+
+deploy:
+  provider: S3
+  access_key_id: AKIAIXWLOTFMKC7GID2A
+  secret_access_key:
+    secure: 1nVtqgv/P+6zzZqV23xq+lRIdq2eN6QY1G5bmtAPkmWbhx76iDUrH81wQRfL8l3O
+  bucket: sqlalchemy-wheels
