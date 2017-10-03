@@ -1,7 +1,7 @@
 environment:
   global:
     UPLOAD_TO_PYPI: false
-    BUILD_COMMIT: rel_1_1_14
+    BUILD_COMMIT: rel_1_0_19
     REPO_DIR: sqlalchemy
     PACKAGE_NAME: sqlalchemy
     PYPI_USERNAME:
